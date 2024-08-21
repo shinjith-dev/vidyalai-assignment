@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
     // TODO use this route to fetch photos for each post
     // axios.get(`https://jsonplaceholder.typicode.com/albums/${post.id}/photos`);
     const images = await getImages(post?.id ?? 1)
+    const user = await fetchUserById(post?.userId)
 
-    return { ...post, images }
+    return { ...post, images, user }
   }))
 
   res.json(postsWithImages);

@@ -66,6 +66,48 @@ const NextButton = styled(Button)`
   right: 10px;
 `;
 
+const PostHeader = styled.div(() => ({
+  display: 'flex',
+  width: '100%',
+  padding: '10px',
+  paddingBottom: 0,
+  gap: '8px',
+  alignItems: 'center'
+}))
+
+
+const RoundedDiv = styled.div(() => ({
+  borderRadius: '50%',
+  backgroundColor: 'gray',
+  color: '#fff',
+  height: '2.8rem',
+  width: '2.8rem',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '1.3rem',
+  fontWeight: 500
+}))
+
+const UserName = styled.p(() => ({
+  fontSize: '1.1rem',
+  fontWeight: 700,
+  marginBottom: '2px'
+}))
+
+const UserEmail = styled.p(() => ({
+  fontSize: '0.8rem',
+}))
+
+const Avatar = ({ name = "New User" }) => {
+  var initials = name.split(' ').map(function(str) { return str ? str[0].toUpperCase() : ""; }).join('');
+  return (
+    <RoundedDiv>
+      {initials}
+    </RoundedDiv>
+  )
+}
+
 const Post = ({ post }) => {
   const carouselRef = useRef(null);
 
@@ -87,8 +129,17 @@ const Post = ({ post }) => {
     }
   };
 
+  console.log(post)
+
   return (
     <PostContainer>
+      <PostHeader>
+        <Avatar name={post?.user?.name} />
+        <div>
+          <UserName>{post.user.name}</UserName>
+          <UserEmail>{post.user.email}</UserEmail>
+        </div>
+      </PostHeader>
       <CarouselContainer>
         <Carousel ref={carouselRef}>
           {post.images.map((image, index) => (
