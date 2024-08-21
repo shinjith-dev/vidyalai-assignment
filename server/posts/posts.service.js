@@ -23,4 +23,21 @@ async function fetchPosts(params) {
   return posts;
 }
 
-module.exports = { fetchPosts };
+const getImages = async (postId) => {
+  let images = [
+    { url: 'https://picsum.photos/200/300' },
+    { url: 'https://picsum.photos/200/300' },
+    { url: 'https://picsum.photos/200/300' },
+  ]
+
+  try {
+    const res = await axios.get(`https://jsonplaceholder.typicode.com/albums/${postId}/photos`)
+    images = res.data
+  }
+  catch (err) {
+    console.log(err)
+  }
+  return images
+}
+
+module.exports = { fetchPosts, getImages };

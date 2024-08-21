@@ -23,6 +23,7 @@ const Carousel = styled.div(() => ({
     display: 'none',
   },
   position: 'relative',
+  scrollSnapType: 'x mandatory'
 }));
 
 const CarouselItem = styled.div(() => ({
